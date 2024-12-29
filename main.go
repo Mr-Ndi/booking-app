@@ -10,6 +10,7 @@ func main() {
 	//This is for printing the datatypes
 	// fmt.Printf("ConferenceName is \t:%T, remainingTicket is\t: %T ,and conferenceTicket is \t:%T\n", ConferenceName, remainingTicket, conferenceTicket)
 
+	fmt.Printf("\n--------------------------------------------------------------\n")
 	fmt.Printf("Wellcome to %v booking application !\n", ConferenceName)
 	fmt.Printf("We have a total of %v and %v are still available\n", conferenceTicket, remainingTicket)
 	fmt.Printf("Get your ticket here and attend  :)\n")
@@ -19,32 +20,36 @@ func main() {
 	// var bookings [50]string
 	var bookings []string
 
-	var firstName string
-	var lastName string
-	var email string
-	var userTicket uint
+	for {
+		var firstName string
+		var lastName string
+		var email string
+		var userTicket uint
 
-	fmt.Println("Hey what's your first name pls :)\t:")
-	fmt.Scan(&firstName)
+		fmt.Println("Hey what's your first name pls :)\t:")
+		fmt.Scan(&firstName)
 
-	fmt.Println("Then what's your second name pls :)\t:")
-	fmt.Scan(&lastName)
+		fmt.Println("Then what's your second name pls :)\t:")
+		fmt.Scan(&lastName)
 
-	fmt.Printf("Lastly %v can you tell me how many ticket would you like to book\t:", firstName)
-	fmt.Scan(&userTicket)
+		fmt.Printf("Lastly %v can you tell me how many ticket would you like to book\t:", firstName)
+		fmt.Scan(&userTicket)
 
-	remainingTicket = remainingTicket - userTicket
-	// bookings[0] = firstName + " " + lastName
-	bookings = append(bookings, firstName+" "+lastName)
+		fmt.Println("Then what's your email address :)\t:")
+		fmt.Scan(&email)
 
-	fmt.Printf("The whole array %v\n", bookings)
-	fmt.Printf("The first Element %v\n", bookings[0])
-	fmt.Printf("The array length %v\n", len(bookings))
-	fmt.Printf("The array Type %T", bookings)
+		fmt.Printf("\n--------------------------------------------------------------\n")
+		fmt.Printf("%v %v Thank you for booking %v tickets. You will receive a confirmation email at %v\n", lastName, firstName, userTicket, email)
+		remainingTicket = remainingTicket - userTicket
+		fmt.Printf("\nThe remaining tickets %v\n", remainingTicket)
+		fmt.Printf("\n--------------------------------------------------------------\n")
+		// bookings[0] = firstName + " " + lastName
+		bookings = append(bookings, firstName+" "+lastName)
 
-	fmt.Println("Then what's your email address :)\t:")
-	fmt.Scan(&email)
+	}
 
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTicket, email)
-	fmt.Printf("Thank you for booking your titckets Then the reamaining tickets %v\n", remainingTicket)
+	// fmt.Printf("The whole array %v\n", bookings)
+	// fmt.Printf("The first Element %v\n", bookings[0])
+	// fmt.Printf("The array length %v\n", len(bookings))
+	// fmt.Printf("The array Type %T", bookings)
 }
