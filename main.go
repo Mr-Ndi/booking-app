@@ -16,6 +16,9 @@ func main() {
 
 	fmt.Printf("\n--------------------------------------------------------------\n")
 
+	// var bookings [50]string
+	var bookings []string
+
 	var firstName string
 	var lastName string
 	var email string
@@ -31,6 +34,13 @@ func main() {
 	fmt.Scan(&userTicket)
 
 	remainingTicket = remainingTicket - userTicket
+	// bookings[0] = firstName + " " + lastName
+	bookings = append(bookings, firstName+" "+lastName)
+
+	fmt.Printf("The whole array %v\n", bookings)
+	fmt.Printf("The first Element %v\n", bookings[0])
+	fmt.Printf("The array length %v\n", len(bookings))
+	fmt.Printf("The array Type %T", bookings)
 
 	fmt.Println("Then what's your email address :)\t:")
 	fmt.Scan(&email)
