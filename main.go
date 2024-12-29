@@ -35,12 +35,17 @@ func main() {
 		fmt.Println("Then what's your second name pls :)\t:")
 		fmt.Scan(&lastName)
 
+		fmt.Println("Then what's your email address :)\t:")
+		fmt.Scan(&email)
+
 		fmt.Printf("Lastly %v can you tell me how many ticket would you like to book\t:", firstName)
 		fmt.Scan(&userTicket)
 
-		if userTicket <= remainingTicket {
-			fmt.Println("Then what's your email address :)\t:")
-			fmt.Scan(&email)
+		isValidName := len(firstName) >= 4 && len(lastName) >= 2
+		isValiEmail := strings.Contains(email, "@")
+		isValidTicketNumber := userTicket > 0 && userTicket <= remainingTicket
+
+		if isValidName && isValiEmail && isValidTicketNumber {
 
 			fmt.Printf("\n--------------------------------------------------------------\n")
 			fmt.Printf("%v %v Thank you for booking %v tickets. You will receive a confirmation email at %v\n", lastName, firstName, userTicket, email)
@@ -51,6 +56,7 @@ func main() {
 			// bookings[0] = firstName + " " + lastName
 			bookings = append(bookings, firstName+" "+lastName)
 			firstNames := []string{}
+
 			// for index, booking := range bookings {
 			for _, booking := range bookings { // blank identifier
 				var names = strings.Fields(booking)
@@ -66,13 +72,23 @@ func main() {
 			}
 		} else {
 			fmt.Printf("\n--------------------------------------------------------------\n")
-			fmt.Printf("Sorry we only have %v tickets, so u can't get %v tickets, So let's start over", remainingTicket, userTicket)
+			// fmt.Printf("Sorry we only have %v tickets, so u can't get %v tickets, So let's start over", remainingTicket, userTicket)
+			if !isValidName {
+				fmt.Print("Either First name or Second name is too short")
+			}
+			if !isValiEmail {
+				fmt.Print("The entered email isn't correct, may be  @ sign is missing")
+			}
+			if !isValidTicketNumber {
+				fmt.Print("Hey bro checkout the ticket bumber you have entered")
+			}
 			fmt.Printf("\n--------------------------------------------------------------\n")
 			// continue
 		}
 
 	}
 
+	// handling arrays, i mean before introduction of slices
 	// fmt.Printf("The whole array %v\n", bookings)
 	// fmt.Printf("The first Element %v\n", bookings[0])
 	// fmt.Printf("The array length %v\n", len(bookings))
