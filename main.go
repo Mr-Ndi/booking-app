@@ -38,24 +38,38 @@ func main() {
 		fmt.Printf("Lastly %v can you tell me how many ticket would you like to book\t:", firstName)
 		fmt.Scan(&userTicket)
 
-		fmt.Println("Then what's your email address :)\t:")
-		fmt.Scan(&email)
+		if userTicket <= remainingTicket {
+			fmt.Println("Then what's your email address :)\t:")
+			fmt.Scan(&email)
 
-		fmt.Printf("\n--------------------------------------------------------------\n")
-		fmt.Printf("%v %v Thank you for booking %v tickets. You will receive a confirmation email at %v\n", lastName, firstName, userTicket, email)
-		remainingTicket = remainingTicket - userTicket
-		fmt.Printf("\nThe remaining tickets %v\n", remainingTicket)
-		fmt.Printf("\n--------------------------------------------------------------\n")
+			fmt.Printf("\n--------------------------------------------------------------\n")
+			fmt.Printf("%v %v Thank you for booking %v tickets. You will receive a confirmation email at %v\n", lastName, firstName, userTicket, email)
+			remainingTicket = remainingTicket - userTicket
+			fmt.Printf("\nThe remaining tickets %v\n", remainingTicket)
+			fmt.Printf("\n--------------------------------------------------------------\n")
 
-		bookings = append(bookings, firstName+" "+lastName)
-		firstNames := []string{}
-		// for index, booking := range bookings {
-		for _, booking := range bookings { // blank identifier
-			var names = strings.Fields(booking)
-			firstNames = append(firstNames, names[0])
+			// bookings[0] = firstName + " " + lastName
+			bookings = append(bookings, firstName+" "+lastName)
+			firstNames := []string{}
+			// for index, booking := range bookings {
+			for _, booking := range bookings { // blank identifier
+				var names = strings.Fields(booking)
+				firstNames = append(firstNames, names[0])
+			}
+			fmt.Printf("\nThe names of those who booked are :%v", firstNames)
+
+			noTicketremaining := remainingTicket == 0
+
+			if noTicketremaining {
+				fmt.Print("The whole conference is booked out. Come back next year")
+				break
+			}
+		} else {
+			fmt.Printf("\n--------------------------------------------------------------\n")
+			fmt.Printf("Sorry we only have %v tickets, so u can't get %v tickets, So let's start over", remainingTicket, userTicket)
+			fmt.Printf("\n--------------------------------------------------------------\n")
+			// continue
 		}
-		fmt.Printf("\nThe names of those who booked are :%v", firstNames)
-		// bookings[0] = firstName + " " + lastName
 
 	}
 
