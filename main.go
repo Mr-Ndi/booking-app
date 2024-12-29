@@ -87,6 +87,15 @@ func main() {
 		}
 
 	}
+	// city := "Kigali"
+	// switch city {
+	// 	case "Bujumbura":
+	// 		//something expressable
+	// 	case "Maputo", "cape-town":
+	// 		//something expressible
+	// 	default:
+	// 		//something for undefined inputs
+	// }
 
 	// handling arrays, i mean before introduction of slices
 	// fmt.Printf("The whole array %v\n", bookings)
