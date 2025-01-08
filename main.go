@@ -1,15 +1,14 @@
 package main
 
 import (
-	"booking-app/helper"
 	"fmt"
-	"strings"
+	"strconv"
 )
 
 var conferenceName = "Go conference"
 var conferenceTicket = 50
 var RemainingTicket uint = 50
-var bookings []string
+var bookings = make([]map[string]string, 0)
 
 func main() {
 
@@ -21,11 +20,12 @@ func main() {
 	for {
 		firstName, lastName, email, userTicket := getUserInput()
 		//calling validating function
-		isValidName, isValiEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastName, userTicket, email, RemainingTicket)
+		isValidName, isValiEmail, isValidTicketNumber := ValidateUserInput(firstName, lastName, userTicket, email, RemainingTicket)
 
 		if isValidName && isValiEmail && isValidTicketNumber {
 			//calling a ticket booking parameter
 			bookTicket(userTicket, firstName, lastName, email)
+
 			// calling firstname printing function
 			firstNames := GetFirstNames()
 			fmt.Printf("\nThe names of those who booked are :%v", firstNames)
@@ -86,10 +86,9 @@ func GetFirstNames() []string {
 
 	// for index, booking := range bookings {
 	for _, booking := range bookings { // blank identifier
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+		// var names = strings.Fields(booking)
+		firstNames = append(firstNames, booking["firstName"])
 	}
-	// fmt.Printf("\nThe names of those who booked are :%v", firstNames)
 	return firstNames
 }
 
@@ -119,7 +118,13 @@ func bookTicket(userTicket uint, firstName string, lastName string, email string
 	fmt.Printf("%v %v Thank you for booking %v tickets. You will receive a confirmation email at %v\n", lastName, firstName, userTicket, email)
 	RemainingTicket = RemainingTicket - userTicket
 	// bookings[0] = firstName + " " + lastName
-	bookings = append(bookings, firstName+" "+lastName)
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["secondName"] = lastName
+	userData["email"] = email
+	userData["ticketNumber"] = strconv.FormatUint(uint64(userTicket), 10)
+
+	bookings = append(bookings, userData)
 	fmt.Printf("\nThe remaining tickets %v\n", RemainingTicket)
 	fmt.Printf("\n--------------------------------------------------------------\n")
 
